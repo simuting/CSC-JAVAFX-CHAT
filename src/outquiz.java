@@ -1,7 +1,13 @@
 package src;
-
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javafx.fxml.FXML;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import java.util.List;
 import java.sql.*;
@@ -22,7 +28,7 @@ public class outquiz {
     private static final String USER_NAME = "root";
     private static final String PASSWORD = "@Yht88319375";
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/newsSystem?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=utf-8";
+    private static final String URL = "jdbc:mysql://localhost:3306/chat";
 
     @FXML private TextField usernameinput;
     @FXML private TextField passwordsinput;
@@ -41,10 +47,29 @@ public class outquiz {
     private PreparedStatement pstmt;
 
     @FXML
-    public void login(){
+    public void login() throws ClassNotFoundException, SQLException {
         user = usernameinput.getText();
         password = passwordsinput.getText();
 //        System.out.println(user + password);
+
+
+//        Class.forName(DRIVER);                                             //TODO 自已写的这个疯狂报错
+//
+//        Connection conn = DriverManager.getConnection(URL, USER_NAME,PASSWORD);
+//
+//        if(conn == null){
+//            System.out.println("失败");
+//
+//        }else{
+//            System.out.println("成功");
+//
+//            Statement statement = conn.createStatement();
+//
+//            String sql = "INSERT INTO people VALUES('zhangsan', 456456456)";
+//        }
+
+
+
 
         try{
 
@@ -77,15 +102,16 @@ public class outquiz {
 //            System.out.println(789);
             e.printStackTrace();
         }
-//        System.out.println(0000);
 
+        //检查mysql是否正常连接
+//
+//
+//
+//
 
-
-
-
-////        FXMLLoader loader = new FXMLLoader(getClass().getResource("xxx.fxml"));
-////        String myTextName = loader.getNamespace().get("myText");
-////        System.out.print(user);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("xxx.fxml"));
+//        String myTextName = (String) loader.getNamespace().get("myText");
+//        System.out.print(user);
 //        // 加载 JDBC 驱动程序
 //        try {
 //            Class.forName("com.mysql.jdbc.Driver");
@@ -96,7 +122,7 @@ public class outquiz {
 //// 创建一个 Connection 对象，用于从数据库中检索和更新数据
 //        Connection con = null;
 //        try {
-//            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb", "root", "password");
+//            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/myfirstconnect", "root", "password");
 //        } catch (SQLException e) {
 //            throw new RuntimeException(e);
 //        }
