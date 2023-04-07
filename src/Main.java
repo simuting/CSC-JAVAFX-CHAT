@@ -19,7 +19,6 @@ public class Main extends Application {
         tmp.setLocation(Main.class.getResource("xxx.fxml"));
 //          tmp.setLocation(Main.class.getResource("shiyong.fxml"));
 //        tmp.setLocation(Main.class.getResource("yong.fxml"));//为什么是Main.class
-
         Parent root = (Parent) tmp.load();                      //什么意思：加载FXML文件并返回根节点（Parent）的方法，返回的根节点就是FXML文件中定义的所有元素的容器。
 //        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setTitle("Socket Chat : Client version 0.3");

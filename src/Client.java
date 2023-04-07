@@ -64,6 +64,7 @@ class Client_listen implements Runnable{
             while (true){
                 ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
                 System.out.println(ois.readObject());
+
             }
         }catch (Exception e){
             e.printStackTrace();
