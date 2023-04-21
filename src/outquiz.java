@@ -1,61 +1,29 @@
 package src;
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.application.Platform;
-import java.util.concurrent.TimeUnit;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import src.chat.client.Client;
+import javafx.application.Application;
 //import com.client.chatwindow.ChatController;
 //import com.client.chatwindow.Listener;                       //TODO
 //import com.client.util.ResizeHelper;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-import javafx.util.Duration;
+import src.chat.client.Client;
+
 import java.io.IOException;
-import java.net.URL;
-import java.util.Random;
-import java.util.ResourceBundle;
-import java.util.List;
-import java.sql.*;
-import java.util.ArrayList;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.stage.Stage;
-import java.awt.*;
-import java.lang.reflect.Field;
-import java.sql.*;
-import java.util.ArrayList;
-import javax.swing.plaf.synth.SynthTextAreaUI;
 
 
 public class outquiz {
@@ -72,7 +40,7 @@ public class outquiz {
     @FXML
     public void quiz(){
         Platform.exit();
-    }
+    }     //TODO 关一个窗口
 
     private  String user;
     private  String password;
@@ -84,7 +52,7 @@ public class outquiz {
 
 //    public static ChatController con;          //TODO
     @FXML
-    public void login() throws ClassNotFoundException, SQLException, IOException {
+    public void login() throws ClassNotFoundException, SQLException, IOException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         user = usernameinput.getText();
         password = passwordsinput.getText();
 //        System.out.println(user + "     " + password);
@@ -113,24 +81,44 @@ public class outquiz {
             }
 
             if(flag){
-                System.out.println("login......");
-                warning.setText("loging");                             //TODO  改字
+                warning.setText("loging");
                 primaryStage = new Stage();
                         // 加载fxml文件
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("window.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("window.fxml"));
 
-//                        name.setText("asdasd");
-                        Parent root = (Parent) loader.load();
+//                name.setText("asdasd");
+                Parent root = (Parent) loader.load();
+//                ChatControl ctc=loader.getController();
+//                FXMLLoader fmxlLoader = new FXMLLoader(getClass().getResource("src/window.fxml"));
+//                Client ctc =new Client();
+//                System.out.println(ctc);
+//                ctc.setname(user);                                 //改名字  TODO
+                Scene scene = new Scene(root);
+                primaryStage.setResizable(false);
+                primaryStage.setScene(scene);
+                primaryStage.show();
+                primaryStage.show();                                       //开窗口
+//                FXMLLoader fmxlLoader2 = new FXMLLoader(getClass().getResource("window.fxml"));
+                Client client =loader.getController();
+                client.startClient(user);
+                client.setname(user);
 
-                        ChatControl ctc=loader.getController();
-                        ctc.setname("asdihdfiuh");                                 //TODO
-//                        controller = loader.getController();
-                        Scene scene = new Scene(root);
-                        primaryStage.setResizable(false);
-                        primaryStage.setScene(scene);
-                        primaryStage.show();
-                        primaryStage.show();
-//                        name.setText("asdasd");                                 //TODO 怎么会这里的name联系不是上面的@FXML呢
+
+
+//                ChatControl con =fmxlLoader2.getController();              //开启聆听线程
+//                System.out.println("con:   " + ctc);
+//                listen listener = new listen(user, ctc);
+//                Thread x = new Thread(listener);
+//                x.start();
+
+
+
+// get the class
+//                        Class<?> cls = Class.forName("test.allSocket.clientSocket");
+//// get the main method
+//                        Method main = cls.getDeclaredMethod("main", String[].class);
+//// invoke the main method
+//                        main.invoke(null, (Object) new String[]{});
 
 
 
@@ -144,6 +132,8 @@ public class outquiz {
                 statement.executeUpdate(sql1);
                 System.out.println("create new people");
             }
+
+
             //FXMLLoader fmxlLoader = new FXMLLoader(getClass().getResource("/src/window.fxml"));
 //                Parent window = (Pane) fmxlLoader.load();
 //                con = fmxlLoader.<ChatController>getController();

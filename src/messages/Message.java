@@ -60,7 +60,10 @@ public class Message implements Serializable {
     }
 
     public void setUserlist(HashMap<String, User> userList) {
+        System.out.println("message,setUserList is used");
+        System.out.println("list is " + list);
         this.list = new ArrayList<>(userList.values());
+        System.out.println("list is " + list);
     }
 
     public void setOnlineCount(int count){
